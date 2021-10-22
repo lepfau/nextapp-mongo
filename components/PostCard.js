@@ -1,10 +1,12 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
-export default function PostCard({ post }) {
+export default function PostCard(props) {
     const [publishing, setPublishing] = useState(false);
     const [deleting, setDeleting] = useState(false);
     const router = useRouter();
+
+    const { post } = props
 
     // Publish post
     const publishPost = async (postId) => {
@@ -30,6 +32,7 @@ export default function PostCard({ post }) {
     };
     // Delete post
     const deletePost = async (postId) => {
+        console.log(postId)
         //change deleting state
         setDeleting(true);
 
@@ -50,6 +53,8 @@ export default function PostCard({ post }) {
             return setDeleting(false);
         }
     };
+
+    
     return (
         <>
             <li>
@@ -62,7 +67,7 @@ export default function PostCard({ post }) {
                         {publishing ? 'Publishing' : 'Publish'}
                     </button>
                 ) : null}
-                <button type="button" onClick={() => deletePost(post['_id'])}>
+                <button type="button" onClick={() => props.deleteItem(post._id)}>
                     {deleting ? 'Deleting' : 'Delete'}
                 </button>
             </li>

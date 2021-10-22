@@ -66,6 +66,8 @@ async function addPost(req, res) {
     }
 }
 
+
+
 async function updatePost(req, res) {
     try {
         // connect to the database
@@ -94,6 +96,8 @@ async function updatePost(req, res) {
     }
 }
 
+
+
 async function deletePost(req, res) {
     try {
         // Connecting to the database
@@ -101,7 +105,7 @@ async function deletePost(req, res) {
 
         // Deleting the post
         await db.collection('posts').deleteOne({
-            _id: new ObjectId(req.body),
+            _id: new ObjectId(req.body._id)
         });
 
         // returning a message
