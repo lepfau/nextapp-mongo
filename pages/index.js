@@ -29,6 +29,19 @@ setPosts(posts.filter(el => el._id !== postid.toString()))
 })
 }
 
+const updateItem = (postid) => {
+    axios.put(`/api/posts`, {_id : postid} )
+    .then((res)=> {
+        axios.get(`/api/posts`)
+        .then((result) => {
+            console.log(result.data.message)
+            setPosts(result.data.message)
+        })
+
+
+    })}
+
+
 
     return (
         <div>
@@ -45,7 +58,7 @@ setPosts(posts.filter(el => el._id !== postid.toString()))
                     ) : (
                         <ul>
                             {posts.map((post, i) => (
-                                <PostCard post={post} key={i} deleteItem={deleteItem} />
+                                <PostCard post={post} key={i} updateItem={updateItem} deleteItem={deleteItem} />
                             ))}
                         </ul>
                     )}

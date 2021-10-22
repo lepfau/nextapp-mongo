@@ -30,30 +30,6 @@ export default function PostCard(props) {
             return setPublishing(false);
         }
     };
-    // Delete post
-    const deletePost = async (postId) => {
-        console.log(postId)
-        //change deleting state
-        setDeleting(true);
-
-        try {
-            // Delete post
-            await fetch('/api/posts', {
-                method: 'DELETE',
-                body: postId,
-            });
-
-            // reset the deleting state
-            setDeleting(false);
-
-            // reload the page
-            return router.push(router.asPath);
-        } catch (error) {
-            // stop deleting state
-            return setDeleting(false);
-        }
-    };
-
     
     return (
         <>
@@ -63,7 +39,7 @@ export default function PostCard(props) {
                 <small>{new Date(post.createdAt).toLocaleDateString()}</small>
                 <br />
                 {!post.published ? (
-                    <button type="button" onClick={() => publishPost(post._id)}>
+                    <button type="button" onClick={() => props.updateItem(post._id)}>
                         {publishing ? 'Publishing' : 'Publish'}
                     </button>
                 ) : null}
